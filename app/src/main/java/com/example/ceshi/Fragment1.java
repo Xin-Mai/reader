@@ -9,11 +9,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bean.Book;
+import com.example.bean.Book_simple;
+import com.example.bean.ThemeBookList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +26,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class Fragment1 extends Fragment {
-    private List<Book> hotList = new ArrayList<>(); //热门书籍
+    private List<Book_simple> hotList ; //热门书籍
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -42,12 +46,10 @@ public class Fragment1 extends Fragment {
 
     private void getHot() throws IOException {
         Gson gson= new Gson();
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().get()
-                .url("http://api.zhuishushenqi.com/ranking/{totalRank}").build();
-        Response response = client.newCall(request).execute();
+        Response response = MainActivity.getRespond
+                ("http://api.zhuishushenqi.com/book-list?duration=last-seven-days&sort=collectorCount");
         String respondData = response.body().string();
-        hotList=gson.fromJson(respondData, new TypeToken<List<Book>>() {
-        }.getType());
+        ThemeBookList HotThemeList = gson.fromJson(respondData,ThemeBookList.class);
+        hotList=HotThemeList.getBookLists();
     }
 }

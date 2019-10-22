@@ -1,5 +1,7 @@
 package com.example.ceshi;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,8 +18,15 @@ import android.view.View;
 
 import com.example.ceshi.ui.main.SectionsPagerAdapter;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,5 +53,31 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public static Response getRespond(String murl){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(murl).build();
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  response;
+    }
+
+    public static Bitmap getBitmap(String murl){
+        Bitmap bitmap=null;
+        try{
+            URL url = new URL(murl);
+            bitmap= BitmapFactory.decodeStream(url.openStream());
+        }catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 }
