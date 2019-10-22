@@ -9,16 +9,18 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bean.AllRank;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
-    private List<Ranking> mRankings;
+    private List<AllRank> mRankings;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView rank_title;
         ImageView book1;
-        ImageView book2;
+        ImageView book2;//准备换一个布局，卡片式
         ImageView book3;
         ImageView book4;
         ImageView book5;   //每个排行榜显示五本书
@@ -34,7 +36,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
         }
     }
 
-    public RankAdapter(List<Ranking> rankings){
+    public RankAdapter(List<AllRank> rankings){
         mRankings=rankings;
     }
 
@@ -48,7 +50,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RankAdapter.ViewHolder holder, int position){
-        Ranking ranking = mRankings.get(position);
+        AllRank ranking = mRankings.get(position);
         holder.rank_title.setText(ranking.getTitle());
         holder.book1=ranking.getBookCover(1);
         holder.book2=ranking.getBookCover(2);
