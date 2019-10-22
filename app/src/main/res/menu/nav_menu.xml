@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/history_log"
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="历史记录" />
+
+        <item
+            android:id="@+id/book_mark"
+            android:icon="@android:drawable/btn_star_big_off"
+            android:title="收藏" />
+
+        <item
+            android:id="@+id/user"
+            android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="个人中心" />
+    </group>
+
+</menu>
