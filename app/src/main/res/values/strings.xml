@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ceshi</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">热门推荐</string>
+    <string name="tab_text_2">排行榜</string>
     <string name="username">Xin</string>
     <string name="read_start">开始阅读</string>
     <string name="read_continue">继续阅读</string>

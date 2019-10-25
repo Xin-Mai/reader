@@ -18,15 +18,14 @@ import java.util.List;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
- //   @StringRes
+//    @StringRes
     private List<Fragment> mfragment;
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
 
-    public SectionsPagerAdapter( FragmentManager fm,List<Fragment> fragments) {
+    public  SectionsPagerAdapter(FragmentManager fm,List<Fragment> fragmentList){
         super(fm);
-        mfragment=fragments;
+        this.mfragment=fragmentList;
     }
-
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.

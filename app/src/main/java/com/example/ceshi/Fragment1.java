@@ -27,6 +27,7 @@ import okhttp3.Response;
 
 public class Fragment1 extends Fragment {
     private List<Book_simple> hotList ; //热门书籍
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){

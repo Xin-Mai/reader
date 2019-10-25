@@ -1,6 +1,6 @@
 package com.example.bean;
 
-public class RankSingle {
+public class RankSingle extends AllRank{
     private String _id;
     private String title;
     private String cover;
