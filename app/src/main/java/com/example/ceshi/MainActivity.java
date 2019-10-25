@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<Fragment> fragmentList=new ArrayList<>();
+ /*       List<Fragment> fragmentList=new ArrayList<>();
         fragmentList.add(new Fragment1());
-        fragmentList.add(new Fragment2());
-
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),fragmentList);
+        fragmentList.add(new Fragment2());*/
+        Log.d("fragment","create ok");
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         final ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
@@ -72,29 +73,54 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public static Response getRespond(String murl){
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(murl).build();
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return  response;
+    public static Response getRespond( String murl){
+        final String url=murl;
+        final List<Response> mresponse = new ArrayList<>();
+ //       final Response[] mresponse = {null};
+       new Thread(new Runnable() {
+           @Override
+           public void run() {
+               try{
+                   OkHttpClient client = new OkHttpClient();
+                   Request request = new Request.Builder()
+                           .url(url).build();
+                   Response response = client.newCall(request).execute();  //这里有问题
+                   if(response!=null)
+                   {
+                       mresponse.add(response);
+                       Log.d("getHot","getResponse");
+                   }
+
+                   else
+                       Log.d("getHot","noRespond");
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }
+           }
+       }).start();
+        return  mresponse.get(0);
     }
 
     public static Bitmap getBitmap(String murl){
-        Bitmap bitmap=null;
-        try{
-            URL url = new URL(murl);
-            bitmap= BitmapFactory.decodeStream(url.openStream());
-        }catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
+        final Bitmap[] bitmap = {null};
+        final String urls=murl;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    try {
+                        URL url = new URL(urls);
+                        bitmap[0] = BitmapFactory.decodeStream(url.openStream());
+                    } catch (MalformedURLException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        return bitmap[0];
     }
 }

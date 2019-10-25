@@ -22,5 +22,9 @@ public class PageViewModel extends ViewModel {
 
     public LiveData<String> getText() {
         return mText;
+    }   //要展示在页面上的话
+
+    public int getIndex(){
+        return mIndex.getValue();
     }
 }
