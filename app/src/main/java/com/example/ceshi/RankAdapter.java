@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bean.AllRank;
 import com.example.bean.RankSingle;
+import com.example.ceshi.ui.main.PlaceholderFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
     public void onBindViewHolder(RankAdapter.ViewHolder holder, int position){
         RankSingle ranking= mRankings.get(position);
         holder.rank_title.setText(ranking.getShortTitle());
-        holder.cover.setImageBitmap(MainActivity.getBitmap(ranking.getCover()));
+ //       holder.cover.setImageBitmap(PlaceholderFragment.getBitmap(ranking.getCover()));
         //Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte,0,imageByte.length);
 
     }

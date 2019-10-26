@@ -27,16 +27,16 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public  SectionsPagerAdapter(Context context,FragmentManager fm){
         super(fm);
         this.mContext=context;
-        mfragment.add(PlaceholderFragment.newInstance(1));
-        mfragment.add(PlaceholderFragment.newInstance(2));
+//        mfragment.add(PlaceholderFragment.newInstance(1));
+//        mfragment.add(PlaceholderFragment.newInstance(2));
 
     }
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        //return PlaceholderFragment.newInstance(position + 1);
-        return mfragment.get(position);
+        return PlaceholderFragment.newInstance(position + 1);
+ //       return mfragment.get(position);
     }
 
     @Nullable
@@ -48,6 +48,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Show 2 total pages.
-        return mfragment.size();
+        return 2;
     }
 }

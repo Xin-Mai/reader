@@ -3,9 +3,10 @@ package com.example.bean;
 import java.util.List;
 
 public class ThemeBookList {
+    private boolean ok;
     private int total;
     private List<Book_simple> bookLists;
-    private boolean ok;
+
 
     public int getTotal() {
         return total;

@@ -7,8 +7,9 @@ public class Book_simple extends Book{
     private String des;
     private String gender;
     private int collectorCount;
-    private String cover;
     private int bookCount;
+    private String cover;
+
 
     public String get_id() {
         return _id;
@@ -40,6 +41,9 @@ public class Book_simple extends Book{
 
     public void setDes(String des) {
         this.des = des;
+    }
+    public String getShortIntro() {
+        return des;
     }
 
     public String getGender() {

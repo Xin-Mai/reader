@@ -2,12 +2,17 @@ package com.example.ceshi;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.ColorLong;
+import androidx.appcompat.app.ActionBar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toolbar;
 
 import com.example.ceshi.ui.main.SectionsPagerAdapter;
 
@@ -45,7 +51,13 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        ActionBar actionBar = getSupportActionBar();
+        DrawerLayout mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layoout);
+        NavigationView navigationView = (NavigationView)findViewById(R.id.main_menu);
+        if(actionBar!=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(Drawable.createFromPath("@android:drawable/ic_dialog_dialer"));
+        }
 
         tabs.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
@@ -64,63 +76,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
-
-    public static Response getRespond( String murl){
-        final String url=murl;
-        final List<Response> mresponse = new ArrayList<>();
- //       final Response[] mresponse = {null};
-       new Thread(new Runnable() {
-           @Override
-           public void run() {
-               try{
-                   OkHttpClient client = new OkHttpClient();
-                   Request request = new Request.Builder()
-                           .url(url).build();
-                   Response response = client.newCall(request).execute();  //这里有问题
-                   if(response!=null)
-                   {
-                       mresponse.add(response);
-                       Log.d("getHot","getResponse");
-                   }
-
-                   else
-                       Log.d("getHot","noRespond");
-               } catch (IOException e) {
-                   e.printStackTrace();
-               }
-           }
-       }).start();
-        return  mresponse.get(0);
-    }
-
-    public static Bitmap getBitmap(String murl){
-        final Bitmap[] bitmap = {null};
-        final String urls=murl;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    try {
-                        URL url = new URL(urls);
-                        bitmap[0] = BitmapFactory.decodeStream(url.openStream());
-                    } catch (MalformedURLException ex) {
-                        ex.printStackTrace();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-        return bitmap[0];
     }
 }

@@ -47,10 +47,10 @@ public class Fragment1 extends Fragment {
 
     private void getHot() throws IOException {
         Gson gson= new Gson();
-        Response response = MainActivity.getRespond
-                ("http://api.zhuishushenqi.com/book-list?duration=last-seven-days&sort=collectorCount");
+   /*    Response response = MainActivity.getRespond
+             ("http://api.zhuishushenqi.com/book-list?duration=last-seven-days&sort=collectorCount");
         String respondData = response.body().string();
         ThemeBookList HotThemeList = gson.fromJson(respondData,ThemeBookList.class);
-        hotList=HotThemeList.getBookLists();
+        hotList=HotThemeList.getBookLists();*/
     }
 }

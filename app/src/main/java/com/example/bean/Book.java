@@ -1,11 +1,17 @@
 package com.example.bean;
 
-public class Book {
-    private String _id;
-    private String title;
-    private String author;
+import com.google.gson.annotations.Expose;
+
+public  class Book {
+    private transient String _id;
+    @Expose
+    private transient String title;
+    @Expose
+    private transient String author;
+    @Expose
     private String shortIntro;
-    private String cover;
+    @Expose
+    private transient String cover;
     private String site;
 
     public String get_id() {
